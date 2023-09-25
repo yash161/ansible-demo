@@ -1,0 +1,24 @@
+---
+- name: Install Nginx
+  hosts: webserver 
+  become: true 
+
+  tasks:
+    - name: Update and upgrade apt packages
+      become: true
+      apt:
+        upgrade: yes
+        update_cache: yes
+        cache_valid_time: 86400
+
+    - name: Install Nginx
+      apt:
+        name: nginx  
+        state: present  # Ensure Nginx is installed
+     
+
+    - name: Start Nginx service
+      service:
+        name: nginx
+        state: started
+       
